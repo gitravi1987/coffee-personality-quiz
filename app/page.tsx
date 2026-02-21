@@ -21,6 +21,7 @@ interface PersonalityResult {
   type: PersonalityType;
   name: string;
   coffee: string;
+  tea: string;
   tagline: string;
   image: string;
 }
@@ -103,20 +104,23 @@ const personalityResults: PersonalityResult[] = [
     type: 'bold-adventurer',
     name: 'Bold Espresso Explorer',
     coffee: 'Double Shot Espresso',
-    tagline: 'You live life at full intensity. Your coffee should too.',
+    tea: 'Bold Black Tea',
+    tagline: 'You live life at full intensity. Your beverage should too.',
     image: '/bold-adventurer.jpg'
   },
   {
     type: 'social-butterfly',
     name: 'Social Latte Lover',
     coffee: 'Signature Vanilla Latte',
-    tagline: 'Coffee tastes better when shared with great company.',
+    tea: 'Honey Chamomile Tea',
+    tagline: 'Great beverages taste better when shared with great company.',
     image: '/social-butterfly.jpg'
   },
   {
     type: 'health-nut',
     name: 'Mindful Matcha Enthusiast',
     coffee: 'Oat Milk Matcha Latte',
+    tea: 'Organic Green Tea',
     tagline: 'Every sip is intentional. Every choice matters.',
     image: '/health-nut.jpg'
   },
@@ -124,7 +128,8 @@ const personalityResults: PersonalityResult[] = [
     type: 'indulgent-treat',
     name: 'Decadent Mocha Maven',
     coffee: 'Triple Chocolate Mocha',
-    tagline: 'Life is short. Drink the chocolate.',
+    tea: 'Vanilla Chai Latte',
+    tagline: 'Life is short. Drink something delicious.',
     image: '/indulgent-treat.jpg'
   }
 ];
@@ -185,11 +190,11 @@ export default function CoffeePersonalityQuiz() {
         {quizState === 'intro' && (
           <div className="bg-[#fff8f0] rounded-3xl p-8 md:p-12 text-center shadow-lg">
             <h1 className="text-4xl md:text-5xl font-bold text-[#5D4037] mb-4 tracking-tight">
-              Discover Your Coffee Personality
+              Discover Your Beverage Personality
             </h1>
             <p className="text-[#6D4C41] text-lg md:text-xl mb-8 leading-relaxed">
               Are you a Bold Espresso Explorer or a Decadent Mocha Maven?
-              Take our quiz to find your perfect Basecamp Coffee match.
+              Take our quiz to find your perfect coffee AND tea matches at Basecamp Coffee.
             </p>
             <button
               onClick={startQuiz}
@@ -262,13 +267,26 @@ export default function CoffeePersonalityQuiz() {
               />
             </div>
 
-            <div className="bg-white rounded-2xl p-6 mb-8 text-center shadow-md">
-              <h3 className="text-2xl font-bold text-[#5D4037] mb-2">
-                Your Perfect Match
+            <div className="bg-white rounded-2xl p-6 mb-8 shadow-md">
+              <h3 className="text-2xl font-bold text-[#5D4037] mb-6 text-center">
+                Your Perfect Matches
               </h3>
-              <p className="text-3xl font-bold text-[#D84315]">
-                {result.coffee}
-              </p>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="text-center p-4 bg-gradient-to-br from-[#ffecd2] to-[#fcb69f] rounded-xl">
+                  <div className="text-4xl mb-2">☕</div>
+                  <p className="text-sm text-[#6D4C41] font-semibold mb-1">Coffee</p>
+                  <p className="text-xl font-bold text-[#5D4037]">
+                    {result.coffee}
+                  </p>
+                </div>
+                <div className="text-center p-4 bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] rounded-xl">
+                  <div className="text-4xl mb-2">🍵</div>
+                  <p className="text-sm text-[#6D4C41] font-semibold mb-1">Tea</p>
+                  <p className="text-xl font-bold text-[#5D4037]">
+                    {result.tea}
+                  </p>
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -282,8 +300,8 @@ export default function CoffeePersonalityQuiz() {
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
-                      title: 'My Coffee Personality',
-                      text: `I'm a ${result.name}! Find your coffee personality at Basecamp Coffee.`,
+                      title: 'My Beverage Personality',
+                      text: `I'm a ${result.name}! My perfect match: ${result.coffee} ☕ or ${result.tea} 🍵. Find your beverage personality at Basecamp Coffee.`,
                     });
                   }
                 }}
